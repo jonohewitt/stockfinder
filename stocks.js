@@ -108,6 +108,9 @@ d3.json(url).then(data => {
       initial = 0;
     }
     const difference = final - initial;
+    if (Math.round(difference) == 0){
+      clearInterval(loop);
+    }
     return (initial += difference * easing);
   };
 
