@@ -71,9 +71,13 @@ d3.json(url).then(data => {
 
   const hoverTextGroup = svg
     .append("g")
-    .attr("transform", "translate(-999,-999)");
+    .attr("transform", "translate(-999,-999)")
+    .style("pointer-events", "none");
 
-  const hoverCircle = svg.append("g").attr("transform", "translate(-999,-999)");
+  const hoverCircle = svg
+    .append("g")
+    .attr("transform", "translate(-999,-999)")
+    .style("pointer-events", "none");
 
   hoverTextGroup
     .append("rect")
@@ -108,20 +112,24 @@ d3.json(url).then(data => {
       initial = 0;
     }
     const difference = final - initial;
-    if (Math.round(difference) == 0){
+    if (Math.round(difference) == 0) {
       clearInterval(loop);
     }
     return (initial += difference * easing);
   };
 
+const getDataPoint = (mouseX) => {
+  const mouseDate = dateScale.invert(mouseX);
+  const bisector = d3.bisector(d => d.date).right;
+  const i = bisector(data, mouseDate);
+  return data[i];
+}
+
   let x;
   let y;
 
   const updateInfo = mouseX => {
-    const mouseDate = dateScale.invert(mouseX);
-    const bisector = d3.bisector(d => d.date).right;
-    const i = bisector(data, mouseDate);
-    const dataPoint = data[i];
+    const dataPoint = getDataPoint(mouseX);
 
     if (dataPoint) {
       const finalX = dateScale(dataPoint.date);
