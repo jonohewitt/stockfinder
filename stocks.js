@@ -72,12 +72,12 @@ d3.json(url).then(data => {
   const hoverTextGroup = svg
     .append("g")
     .attr("transform", "translate(-999,-999)")
-    // .style("pointer-events", "none");
+    .style("pointer-events", "none");
 
   const hoverCircle = svg
     .append("g")
     .attr("transform", "translate(-999,-999)")
-    // .style("pointer-events", "none");
+    .style("pointer-events", "none");
 
   hoverTextGroup
     .append("rect")
