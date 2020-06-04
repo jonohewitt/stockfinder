@@ -72,12 +72,12 @@ d3.json(url).then(data => {
   const hoverTextGroup = svg
     .append("g")
     .attr("transform", "translate(-999,-999)")
-    .style("pointer-events", "none");
+    // .style("pointer-events", "none");
 
   const hoverCircle = svg
     .append("g")
     .attr("transform", "translate(-999,-999)")
-    .style("pointer-events", "none");
+    // .style("pointer-events", "none");
 
   hoverTextGroup
     .append("rect")
@@ -168,7 +168,7 @@ const getDataPoint = (mouseX) => {
     startLoop(d3.mouse(this)[0]);
   });
 
-  svg.on("mouseout", () => {
+  svg.on("mouseleave", () => {
     hoverTextGroup.attr("transform", "translate(-999,-999)");
     hoverCircle.attr("transform", "translate(-999,-999)");
     clearInterval(loop);
